@@ -76,15 +76,30 @@
     visibility: hidden;
     display: flex;
     position: fixed;
+    flex-direction: column;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    gap: 10px   ;
     justify-content: center;
     align-items: center;
-    background-color: rgba(65, 57, 57, 0.363);
+    background-color: rgba(255, 0, 0, 0.363);
 }
-
+.game-over-text {
+    color: white;
+    font-size: 5em; /* Large text */
+    font-weight: bold;
+    text-shadow: 3px 3px black; /* Slight shadow for depth */
+    text-align: center;
+  }
+  
+  .game-over-character {
+    display: block;
+    margin: 0 auto; /* Center the character */
+    width: 200px; /* Adjust based on your design */
+    /* Additional styles to mimic the character's position in your game */
+  }
 .restart{
     height: 60px;
     width: 350px;
