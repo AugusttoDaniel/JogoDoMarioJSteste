@@ -9,6 +9,7 @@ const highScoresDisplay = document.querySelector('.high-scores');
 let score = 0;
 let scoreInterval;
 let highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+let playerName = prompt("Por favor, insira seu nome:", "Jogador") || "Jogador Anônimo"; // Solicita o nome do jogador
 
 function updateScoreDisplay() {
     scoreDisplay.textContent = `Score: ${score}`;
@@ -25,15 +26,20 @@ function startScore() {
 
 function stopScoreAndUpdateHighScores() {
     clearInterval(scoreInterval);
-    highScores.push(score);
-    highScores.sort((a, b) => b - a);
+    // Verifica se o score atual e o nome estão sendo corretamente adicionados ao array de highScores
+    highScores.push({ score: score, name: playerName });
+    // Certifique-se de que a ordenação está considerando o objeto com score e nome
+    highScores.sort((a, b) => b.score - a.score);
+    // Mantém apenas os 5 melhores scores
     highScores = highScores.slice(0, 5);
+    // Atualiza os highScores no localStorage
     localStorage.setItem('highScores', JSON.stringify(highScores));
+    // Atualiza a exibição dos highScores
     updateHighScoresDisplay();
 }
 
 function updateHighScoresDisplay() {
-    highScoresDisplay.innerHTML = 'Best Scores:<br>' + highScores.map((score, index) => `${index + 1}. ${score}`).join('<br>');
+    highScoresDisplay.innerHTML = 'Best Scores:<br>' + highScores.map((item, index) => `${index + 1}. ${item.name}: ${item.score}`).join('<br>');
 }
 
 function jump() {
@@ -72,6 +78,11 @@ function gameLoop() {
 }
 
 function restart() {
+    let keepName = confirm("Deseja manter o nome '" + playerName + "'?");
+    if (!keepName) {
+        playerName = prompt("Por favor, insira seu novo nome:", playerName) || playerName; // Permite a mudança de nome
+    }
+
     gameOver.style.visibility = 'hidden';
 
     pipe.style.animation = 'pipe-animations 1.5s infinite linear';
