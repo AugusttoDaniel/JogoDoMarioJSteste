@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Corrigido de 0 para border-box */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.game-board{
+    width: 100vw; /* Alterado para 100% da largura da viewport */
+    height: 100vh; /* Alterado para 100% da altura da viewport */
+    border-bottom: 5vh solid green; /* Ajuste proporcional para a altura */
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(#63c4eb, #E0F6FF);
+}
+
+.pipe{
+    position: absolute;
+    bottom: 0;
+    width: 60px; /* Considerar ajuste proporcional se necessário */
+    animation: pipe-animations 1.5s infinite linear;
+}
+
+.mario{
+    width: 8vw; /* Exemplo de ajuste proporcional */
+    position: absolute;
+    bottom: 5vh; /* Ajuste proporcional */
+}
+
+.jump{
+    animation: mario-animation 500ms ease-out;
+}
+
+.cloud{
+    width: 25vw; /* Exemplo de ajuste proporcional */
+    position: absolute;
+    animation: cloud 20s infinite linear;
+}
+
+.game-over{
+    visibility: hidden;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(65, 57, 57, 0.363);
+}
+
+.restart{
+    height: 60px;
+    width: 350px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    background-color: blue;
+    cursor: pointer;
+}
+
+@keyframes pipe-animations {
+    from {
+        right: -80px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
+@keyframes mario-animation {
+    0% {
+        bottom: 0;
+    }
+    40%, 50%, 60% {
+        bottom: 15vh; /* Ajuste proporcional */
+    }
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes cloud {
+    from {
+        right: -550px;
+    }
+    to {
+        right: 100%;
+    }
+}
+
+@media (max-width: 620px){
+    .mario {
+        width: 15vw; /* Ajuste proporcional para dispositivos menores */
+    }
+
+    .pipe {
+        width: 8vw; /* Ajuste proporcional */
+        animation: pipe-animations 1s infinite linear;
+    }
+}
